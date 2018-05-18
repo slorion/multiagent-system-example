@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<!-- https://docs.nuget.org/create/nuspec-reference -->
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$id$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<description>$description$</description>
+		<!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+		<!--<projectUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>-->
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright 2015</copyright>
+		<tags>DLC</tags>
+	</metadata>
+</package>

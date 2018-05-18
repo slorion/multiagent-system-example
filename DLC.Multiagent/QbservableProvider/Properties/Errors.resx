@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateServiceDelegatesNotPublic" xml:space="preserve">
+    <value>The service and/or formatterFactory arguments could not be deserialized in the new AppDomain.  Make sure that their delegates point to publicly visible members.</value>
+  </data>
+  <data name="ExpressionCallLocalVoidFormat" xml:space="preserve">
+    <value>The query executes a void-returning method "{0}" on a local type "{1}".  Method calls in Qbservable queries are not permitted to be executed only for their local side-effects.</value>
+  </data>
+  <data name="ExpressionCallMissingLocalArgumentFormat" xml:space="preserve">
+    <value>The query executes a method "{0}" on a local type "{1}" with an argument that is not available locally.</value>
+  </data>
+  <data name="ExpressionCallMissingLocalInstanceFormat" xml:space="preserve">
+    <value>The query executes a method "{0}" on a local type "{1}" for which an instance is not available locally.</value>
+  </data>
+  <data name="ExpressionClosureBug" xml:space="preserve">
+    <value>A closure was not replaced while visiting its members.  This may indicate a problem with the visitor.</value>
+  </data>
+  <data name="ExpressionDelegateReturnsNonGenericAnonymousType" xml:space="preserve">
+    <value>A delegate used in the query has a non-generic anonymous return type.{0}Delegate type: {1}</value>
+  </data>
+  <data name="ExpressionMemberMissingLocalInstanceFormat" xml:space="preserve">
+    <value>The query uses a field or property "{0}" on a local type "{1}" for which an instance is not available locally.</value>
+  </data>
+  <data name="ExpressionUnknownBaseType" xml:space="preserve">
+    <value>The type "{0}" cannot be used in the query because it derives from type "{1}", which was not specified as a known type.</value>
+  </data>
+  <data name="ExpressionUnknownType" xml:space="preserve">
+    <value>The type "{0}" cannot be used in the query because it was not specified as a known type.</value>
+  </data>
+  <data name="ExpressionUnsupportedCompilerType" xml:space="preserve">
+    <value>A compiler-generated type is referenced at an unsupported position in the query.</value>
+  </data>
+  <data name="ExpressionUnsupportedCompilerTypeAsMethodTypeArg" xml:space="preserve">
+    <value>A compiler-generated type is referenced as a method's generic type argument at an unsupported position in the query.</value>
+  </data>
+  <data name="ExpressionUnsupportedCompilerTypeAsTypeArg" xml:space="preserve">
+    <value>A compiler-generated type is referenced as a generic type argument at an unsupported position in the query.</value>
+  </data>
+  <data name="ExpressionVisitedCompilerTypeTwice" xml:space="preserve">
+    <value>A compiler-generated type was visited twice.</value>
+  </data>
+  <data name="ProtocolDuplexSinkUnavailableForClientCallback" xml:space="preserve">
+    <value>The client has sent a query that requires duplex communication, which is currently disabled on the server.  To enable duplex communication, specify the EnableDuplex option when creating the service.</value>
+  </data>
+  <data name="ProtocolDuplicateDuplexId" xml:space="preserve">
+    <value>Duplicate duplex callback identifier.</value>
+  </data>
+  <data name="ProtocolDuplicateDuplexIdForEnumerator" xml:space="preserve">
+    <value>The duplex callback enumerator identifier is a duplicate.</value>
+  </data>
+  <data name="ProtocolDuplicateDuplexIdForInvoke" xml:space="preserve">
+    <value>The duplex callback invocation identifier is a duplicate.</value>
+  </data>
+  <data name="ProtocolDuplicateDuplexIdForObservable" xml:space="preserve">
+    <value>The duplex callback observable identifier is a duplicate.</value>
+  </data>
+  <data name="ProtocolExpectedMessageSubscribeFormat" xml:space="preserve">
+    <value>Protocol expected Subscribe message but received {0} instead.</value>
+  </data>
+  <data name="ProtocolInvalidDuplexId" xml:space="preserve">
+    <value>The duplex callback identifier is invalid.</value>
+  </data>
+  <data name="ProtocolInvalidDuplexIdForEnumerator" xml:space="preserve">
+    <value>The duplex callback enumerator identifier is invalid.</value>
+  </data>
+  <data name="ProtocolInvalidDuplexIdForInvoke" xml:space="preserve">
+    <value>The duplex callback inovcation identifier is invalid.</value>
+  </data>
+  <data name="ProtocolInvalidDuplexIdForObservable" xml:space="preserve">
+    <value>The duplex callback observable identifier is invalid.</value>
+  </data>
+  <data name="ProtocolUnknownMessageKindFormat" xml:space="preserve">
+    <value>Unknown message kind received: {0}</value>
+  </data>
+</root>

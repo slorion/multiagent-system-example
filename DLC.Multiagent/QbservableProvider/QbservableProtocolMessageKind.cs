@@ -1,0 +1,30 @@
+﻿namespace QbservableProvider
+{
+	internal enum QbservableProtocolMessageKind : byte
+	{
+		Unknown,
+		OnNext,
+		OnCompleted,
+		OnError,
+		ShutDown,
+		Argument,
+		Subscribe,
+		DuplexInvoke,
+		DuplexSubscribe,
+		DuplexDisposeSubscription,
+		DuplexGetEnumerator,
+		DuplexGetEnumeratorResponse,
+		DuplexGetEnumeratorErrorResponse,
+		DuplexMoveNext,
+		DuplexResetEnumerator,
+		DuplexDisposeEnumerator,
+		DuplexEnumeratorResponse,
+		DuplexEnumeratorErrorResponse,
+		DuplexResponse,
+		DuplexErrorResponse,
+		DuplexSubscribeResponse,
+		DuplexOnNext,
+		DuplexOnCompleted,
+		DuplexOnError
+	}
+}

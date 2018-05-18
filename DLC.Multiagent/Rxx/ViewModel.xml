@@ -1,0 +1,215 @@
+﻿<doc>
+	<remarks name="Full">
+		<para>
+			A view model provides a decoupled container for the state and behaviors on which a user interface (UI) depends.  State and
+			behaviors are typically represented in view models as targets for property and event bindings in the UI, without specific knowledge
+			of the type or layout of the UI to which they're bound.
+		</para>
+		<para>
+			Classic view model base classes aren't designed specifically for reactive programming with <see cref="IObservable{T}"/>, making them
+			somewhat awkward to use in conjunction with observables.  Property bindings with <see cref="DependencyProperty"/>,
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> and event bindings with <see cref="System.Windows.Input.ICommand"/> are quite
+			useful for decoupling a UI from its reusable state and behaviors, but they make reactive programming difficult because we must first convert
+			them into observable sequences to take advantage of the capabilities of the <strong>Rx</strong> declarative programming model and LINQ.
+		</para>
+		<para>
+			<see cref="ViewModel"/> does not implement <see cref="System.ComponentModel.INotifyPropertyChanged"/> because it targets a reactive
+			programming model instead.  To bind to a reactive property, simply return any object that implements <see cref="IObservable{T}"/>,
+			including <see cref="System.Reactive.Subjects.IListSubject{T}"/> and <see cref="System.Reactive.Subjects.IDictionarySubject{TKey,TValue}"/>
+			when collections are needed, then create a binding in XAML using <see cref="System.Windows.Reactive.Subscription"/>.  To create a reactive
+			command, simply return an instance of <see cref="System.Reactive.Subjects.CommandSubject"/>, then use a UI binding as you normally
+			would to an <see cref="System.Windows.Input.ICommand"/>.  To bind to a UI event, create a binding in XAML using
+			<see cref="System.Windows.Reactive.Subscription"/> to a property that returns <see cref="System.Windows.RoutedEventHandler" />,
+			<see cref="EventHandler" />, <see cref="Action" />, <see cref="Action{T}" />, <see cref="System.Windows.Input.ICommand"/> or an object
+			that implements <see cref="IObserver{T}"/>, such as <see cref="System.Reactive.Subjects.Subject{T}"/>.  The generic type parameters can
+			match either the sender and event argument types of the event handler used by the event, <see cref="System.Reactive.EventPattern{T}" />
+			or <see cref="System.Reactive.EventPattern{TSender,TEventArgs}" />.
+		</para>
+		<para>
+			All of the aforementioned solutions use types that implement <see cref="IObservable{T}"/>, which makes it possible to define
+			complex reactive queries among the different states and behaviors that are encapsulated by the view model.
+		</para>
+		<para>
+			Furthermore, subscribing to an observable sequence yields an <see cref="IDisposable"/> artifact that represents the subscription.  It
+			has a logical lifetime that is the lifetime of the UI to which the view model is attached.  Since the cancelation and disposal model of
+			<strong>Rx</strong> is explicit to support fire-and-forget scenarios, often it's required to composite a view model's subscriptions
+			and dispose of them when the UI is no longer needed, such as when it's unloaded.  Take a dialog window for example, which may create
+			subscriptions to observable sequences that must be canceled and released when the dialog is closed.
+		</para>
+		<para>
+			<see cref="ViewModel"/> supports this by offering a composited collection of disposables that have the same lifetime as the
+			<see cref="FrameworkElement"/> to which the view model is attached.  When the <see cref="FrameworkElement.Unloaded"/> event is raised,
+			all of the view model's disposables are disposed, so if subscriptions to observable sequences are added to the disposables collection
+			they are cancelled and freed in a deterministic manner that corresponds directly to the lifetime of the UI.
+		</para>
+		<para>
+			Another common occurrence when authoring view models is to subscribe to new observable sequences when the UI element first loads.
+			<see cref="ViewModel"/> facilitates this by providing an <see cref="Attaching"/> method that derived classes can override.
+			<see cref="Attaching"/> returns a sequence of <see cref="IDisposable"/> objects that are automatically added to the composited
+			disposables collection of the view model.  This makes it possible to subscribe to one or more observable sequences in an iterator
+			block by simply yielding each subscription as a result.  The subscriptions yielded are automatically disposed when the UI is unloaded.
+		</para>
+		<alert type="tip">
+			To attach a <see cref="ViewModel"/> to a <see cref="FrameworkElement"/> object, first define a class that derives from
+			<see cref="ViewModel"/>.  Then use the <see cref="FrameworkElementExtensions.SetViewModel(FrameworkElement,Func{object})"/> method and
+			return a new instance of your class within the factory argument, or use the <see cref="System.Windows.Reactive.View.ModelProperty"/>
+			attached property in XAML and set it to the <see cref="Type"/> of your class.
+		</alert>
+	</remarks>
+
+	<remarks name="Silverlight" version="4">
+		<para>
+			A view model provides a decoupled container for the state and behaviors on which a user interface (UI) depends.  State and
+			behaviors are typically represented in view models as targets for property and event bindings in the UI, without specific knowledge
+			of the type or layout of the UI to which they're bound.
+		</para>
+		<para>
+			Classic view model base classes aren't designed specifically for reactive programming with <see cref="IObservable{T}"/>, making them
+			somewhat awkward to use in conjunction with observables.  Property bindings with <see cref="DependencyProperty"/>,
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> and event bindings with <see cref="System.Windows.Input.ICommand"/> are quite
+			useful for decoupling a UI from its reusable state and behaviors, but they make reactive programming difficult because we must first convert
+			them into observable sequences to take advantage of the capabilities of the <strong>Rx</strong> declarative programming model and LINQ.
+		</para>
+		<para>
+			<see cref="ViewModel"/> does not implement <see cref="System.ComponentModel.INotifyPropertyChanged"/> because it targets a reactive
+			programming model instead.  To bind to a reactive property, define a <strong>DependencyProperty</strong> or implement
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> yourself.  To create a reactive
+			command, simply return an instance of <see cref="System.Reactive.Subjects.CommandSubject"/>, then use a UI binding as you normally
+			would to an <see cref="System.Windows.Input.ICommand"/>.  To bind to a UI event, create a property that returns an object that implements
+			<see cref="IObserver{T}"/>, such as <see cref="System.Reactive.Subjects.Subject{T}"/>, then create a binding in XAML using
+			<see cref="System.Windows.Reactive.EventSubscription"/>.
+		</para>
+		<para>
+			All of the aforementioned solutions use types that implement <see cref="IObservable{T}"/>, which makes it possible to define
+			complex reactive queries among the different states and behaviors that are encapsulated by the view model.
+		</para>
+		<para>
+			Furthermore, subscribing to an observable sequence yields an <see cref="IDisposable"/> artifact that represents the subscription.  It
+			has a logical lifetime that is the lifetime of the UI to which the view model is attached.  Since the cancelation and disposal model of
+			<strong>Rx</strong> is explicit to support fire-and-forget scenarios, often it's required to composite a view model's subscriptions
+			and dispose of them when the UI is no longer needed, such as when it's unloaded.  Take a dialog window for example, which may create
+			subscriptions to observable sequences that must be canceled and released when the dialog is closed.
+		</para>
+		<para>
+			<see cref="ViewModel"/> supports this by offering a composited collection of disposables that have the same lifetime as the
+			<see cref="FrameworkElement"/> to which the view model is attached.  When the <see cref="FrameworkElement.Unloaded"/> event is raised,
+			all of the view model's disposables are disposed, so if subscriptions to observable sequences are added to the disposables collection
+			they are cancelled and freed in a deterministic manner that corresponds directly to the lifetime of the UI.
+		</para>
+		<para>
+			Another common occurrence when authoring view models is to subscribe to new observable sequences when the UI element first loads.
+			<see cref="ViewModel"/> facilitates this by providing an <see cref="Attaching"/> method that derived classes can override.
+			<see cref="Attaching"/> returns a sequence of <see cref="IDisposable"/> objects that are automatically added to the composited
+			disposables collection of the view model.  This makes it possible to subscribe to one or more observable sequences in an iterator
+			block by simply yielding each subscription as a result.  The subscriptions yielded are automatically disposed when the UI is unloaded.
+		</para>
+		<alert type="tip">
+			To attach a <see cref="ViewModel"/> to a <see cref="FrameworkElement"/> object, first define a class that derives from
+			<see cref="ViewModel"/>.  Then use the <see cref="FrameworkElementExtensions.SetViewModel(FrameworkElement,Func{object})"/> method and
+			return a new instance of your class within the factory argument.
+		</alert>
+	</remarks>
+
+	<remarks name="Silverlight" version="5">
+		<para>
+			A view model provides a decoupled container for the state and behaviors on which a user interface (UI) depends.  State and
+			behaviors are typically represented in view models as targets for property and event bindings in the UI, without specific knowledge
+			of the type or layout of the UI to which they're bound.
+		</para>
+		<para>
+			Classic view model base classes aren't designed specifically for reactive programming with <see cref="IObservable{T}"/>, making them
+			somewhat awkward to use in conjunction with observables.  Property bindings with <see cref="DependencyProperty"/>,
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> and event bindings with <see cref="System.Windows.Input.ICommand"/> are quite
+			useful for decoupling a UI from its reusable state and behaviors, but they make reactive programming difficult because we must first convert
+			them into observable sequences to take advantage of the capabilities of the <strong>Rx</strong> declarative programming model and LINQ.
+		</para>
+		<para>
+			<see cref="ViewModel"/> does not implement <see cref="System.ComponentModel.INotifyPropertyChanged"/> because it targets a reactive
+			programming model instead.  To bind to a reactive property, define a <strong>DependencyProperty</strong> or implement
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> yourself.  To create a reactive
+			command, simply return an instance of <see cref="System.Reactive.Subjects.CommandSubject"/>, then use a UI binding as you normally
+			would to an <see cref="System.Windows.Input.ICommand"/>.
+		</para>
+		<para>
+			All of the aforementioned solutions use types that implement <see cref="IObservable{T}"/>, which makes it possible to define
+			complex reactive queries among the different states and behaviors that are encapsulated by the view model.
+		</para>
+		<para>
+			Furthermore, subscribing to an observable sequence yields an <see cref="IDisposable"/> artifact that represents the subscription.  It
+			has a logical lifetime that is the lifetime of the UI to which the view model is attached.  Since the cancelation and disposal model of
+			<strong>Rx</strong> is explicit to support fire-and-forget scenarios, often it's required to composite a view model's subscriptions
+			and dispose of them when the UI is no longer needed, such as when it's unloaded.  Take a dialog window for example, which may create
+			subscriptions to observable sequences that must be canceled and released when the dialog is closed.
+		</para>
+		<para>
+			<see cref="ViewModel"/> supports this by offering a composited collection of disposables that have the same lifetime as the
+			<see cref="FrameworkElement"/> to which the view model is attached.  When the <see cref="FrameworkElement.Unloaded"/> event is raised,
+			all of the view model's disposables are disposed, so if subscriptions to observable sequences are added to the disposables collection
+			they are cancelled and freed in a deterministic manner that corresponds directly to the lifetime of the UI.
+		</para>
+		<para>
+			Another common occurrence when authoring view models is to subscribe to new observable sequences when the UI element first loads.
+			<see cref="ViewModel"/> facilitates this by providing an <see cref="Attaching"/> method that derived classes can override.
+			<see cref="Attaching"/> returns a sequence of <see cref="IDisposable"/> objects that are automatically added to the composited
+			disposables collection of the view model.  This makes it possible to subscribe to one or more observable sequences in an iterator
+			block by simply yielding each subscription as a result.  The subscriptions yielded are automatically disposed when the UI is unloaded.
+		</para>
+		<alert type="tip">
+			To attach a <see cref="ViewModel"/> to a <see cref="FrameworkElement"/> object, first define a class that derives from
+			<see cref="ViewModel"/>.  Then use the <see cref="FrameworkElementExtensions.SetViewModel(FrameworkElement,Func{object})"/> method and
+			return a new instance of your class within the factory argument, or use the <see cref="System.Windows.Reactive.View.ModelProperty"/>
+			attached property in XAML and set it to the <see cref="Type"/> of your class.
+		</alert>
+	</remarks>
+
+	<remarks name="Phone">
+		<para>
+			A view model provides a decoupled container for the state and behaviors on which a user interface (UI) depends.  State and
+			behaviors are typically represented in view models as targets for property and event bindings in the UI, without specific knowledge
+			of the type or layout of the UI to which they're bound.
+		</para>
+		<para>
+			Classic view model base classes aren't designed specifically for reactive programming with <see cref="IObservable{T}"/>, making them
+			somewhat awkward to use in conjunction with observables.  Property bindings with <see cref="DependencyProperty"/>,
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> and event bindings with <see cref="System.Windows.Input.ICommand"/> are quite
+			useful for decoupling a UI from its reusable state and behaviors, but they make reactive programming difficult because we must first convert
+			them into observable sequences to take advantage of the capabilities of the <strong>Rx</strong> declarative programming model and LINQ.
+		</para>
+		<para>
+			<see cref="ViewModel"/> does not implement <see cref="System.ComponentModel.INotifyPropertyChanged"/> because it targets a reactive
+			programming model instead.  To bind to a reactive property, define a <strong>DependencyProperty</strong> or implement
+			<see cref="System.ComponentModel.INotifyPropertyChanged"/> yourself.  To create a reactive
+			command, simply return an instance of <see cref="System.Reactive.Subjects.CommandSubject"/>, then use a UI binding as you normally
+			would to an <see cref="System.Windows.Input.ICommand"/>.
+		</para>
+		<para>
+			All of the aforementioned solutions use types that implement <see cref="IObservable{T}"/>, which makes it possible to define
+			complex reactive queries among the different states and behaviors that are encapsulated by the view model.
+		</para>
+		<para>
+			Furthermore, subscribing to an observable sequence yields an <see cref="IDisposable"/> artifact that represents the subscription.  It
+			has a logical lifetime that is the lifetime of the UI to which the view model is attached.  Since the cancelation and disposal model of
+			<strong>Rx</strong> is explicit to support fire-and-forget scenarios, often it's required to composite a view model's subscriptions
+			and dispose of them when the UI is no longer needed, such as when it's unloaded.  Take a dialog window for example, which may create
+			subscriptions to observable sequences that must be canceled and released when the dialog is closed.
+		</para>
+		<para>
+			<see cref="ViewModel"/> supports this by offering a composited collection of disposables that have the same lifetime as the
+			<see cref="FrameworkElement"/> to which the view model is attached.  When the <see cref="FrameworkElement.Unloaded"/> event is raised,
+			all of the view model's disposables are disposed, so if subscriptions to observable sequences are added to the disposables collection
+			they are cancelled and freed in a deterministic manner that corresponds directly to the lifetime of the UI.
+		</para>
+		<para>
+			Another common occurrence when authoring view models is to subscribe to new observable sequences when the UI element first loads.
+			<see cref="ViewModel"/> facilitates this by providing an <see cref="Attaching"/> method that derived classes can override.
+			<see cref="Attaching"/> returns a sequence of <see cref="IDisposable"/> objects that are automatically added to the composited
+			disposables collection of the view model.  This makes it possible to subscribe to one or more observable sequences in an iterator
+			block by simply yielding each subscription as a result.  The subscriptions yielded are automatically disposed when the UI is unloaded.
+		</para>
+		<alert type="tip">
+			To attach a <see cref="ViewModel"/> to a <see cref="FrameworkElement"/> object, first define a class that derives from
+			<see cref="ViewModel"/>.  Then use the <see cref="FrameworkElementExtensions.SetViewModel(FrameworkElement,Func{object})"/> method and
+			return a new instance of your class within the factory argument.
+		</alert>
+	</remarks>
+</doc>

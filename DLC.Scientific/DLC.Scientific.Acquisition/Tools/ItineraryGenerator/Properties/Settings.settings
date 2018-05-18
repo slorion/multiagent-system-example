@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DLC.Scientific.Acquisition.Tools.ItineraryGenerator.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BgrConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server=localhost;Port=5432;User Id=postgres;Password=postgres;Database=bgr;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15;</Value>
+    </Setting>
+    <Setting Name="AutoCorrectDelta" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="AllowedBgrDataTypes" Type="DLC.Scientific.Core.Geocoding.Bgr.BgrDataTypes" Scope="User">
+      <Value Profile="(Default)">Routes</Value>
+    </Setting>
+    <Setting Name="MinSearchRadiusInMeters" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="MaxSearchRadiusInMeters" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="DirectionBufferSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
+    <Setting Name="GpsLogGap" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
