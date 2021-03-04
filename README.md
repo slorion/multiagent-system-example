@@ -2,7 +2,7 @@
 
 This project showcases a distributed agent system that is being used on a flotilla of vehicles
 to acquire near realtime (<10 ms latency) scientific data while moving on average at 100 km/h. Data comes from various equipment such as
-a [high-precision inertial GPS system](http://www.datrontechnology.co.uk/industry/surveying-systems/aerial-survey/inertial/),
+a [high-precision inertial GPS system](https://www.datrontechnology.co.uk/products/inertial-navigation/),
 a [laser crack measurement system (LCMS)](http://www.pavemetrics.com/applications/road-inspection/laser-crack-measurement-system/),
 multiple [high-resolution cameras](https://www.alliedvision.com/en/products/cameras.html), ...
 The production system also has realtime analysis agents that handle tasks such as detecting lane markings from photos of the road,
